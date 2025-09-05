@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opa GPT - Textverktyg</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="header-text">
+                    <h1>Opa GPT</h1>
+                    <p>Professionella verktyg för effektivare studier</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                
+                <!-- Text Processing Section -->
+                <section class="section-group">
+                    <div class="section-divider">
+                        <h2 class="section-title">
+                            <i class="fas fa-edit"></i>
+                            Textbearbetning
+                        </h2>
+                        <div class="divider-line"></div>
+                    </div>
+                    
+                    <div class="tools-grid">
+                        <!-- Text Humanizer Card -->
+                        <div class="tool-card">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-user-edit"></i>
+                                </div>
+                                <div class="card-title">
+                                    <h3>Text Humanizer</h3>
+                                    <p>Gör din text mer naturlig och mänsklig</p>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="input-section">
+                                    <label for="inputText" class="input-label">Text att humanisera</label>
+                                    <textarea id="inputText" placeholder="Klistra in text som ska humaniseras..."></textarea>
+                                </div>
+                                <div class="button-group">
+                                    <button id="humanizeBtn" class="btn btn-primary">
+                                        <span class="btn-text">
+                                            <i class="fas fa-magic"></i>
+                                            Humanisera text
+                                        </span>
+                                        <span class="loading" style="display: none;">
+                                            <i class="fas fa-spinner fa-spin"></i>
+                                            Bearbetar...
+                                        </span>
+                                    </button>
+                                    <button id="clearBtn" class="btn btn-secondary">
+                                        <i class="fas fa-trash"></i>
+                                        Rensa
+                                    </button>
+                                </div>
+                                <div class="output-section">
+                                    <label for="outputText" class="output-label">Resultat</label>
+                                    <textarea id="outputText" readonly></textarea>
+                                    <button id="copyBtn" class="btn btn-secondary btn-small" style="display: none;">
+                                        <i class="fas fa-copy"></i>
+                                        Kopiera
+                                    </button>
+                                </div>
+                                
+                                <!-- Analysis Panel -->
+                                <div id="analysisPanel" class="analysis-panel" style="display: none;">
+                                    <h4>Textanalys</h4>
+                                    <div class="analysis-grid">
+                                        <div class="analysis-item">
+                                            <span class="analysis-label">AI-mönster:</span>
+                                            <span id="aiPatterns" class="analysis-value">-</span>
+                                        </div>
+                                        <div class="analysis-item">
+                                            <span class="analysis-label">Mänsklighet:</span>
+                                            <span id="humanScore" class="analysis-value">-/10</span>
+                                        </div>
+                                        <div class="analysis-item">
+                                            <span class="analysis-label">Detektionsrisk:</span>
+                                            <span id="detectionRisk" class="analysis-value">-</span>
+                                        </div>
+                                        <div class="analysis-item">
+                                            <span class="analysis-label">Konfidensgrad:</span>
+                                            <span id="confidenceLevel" class="analysis-value">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Changes Explanation -->
+                                <div id="changesExplanation" class="changes-explanation" style="display: none;">
+                                    <h4>Genomförda ändringar</h4>
+                                    <ul id="changesList" class="changes-list"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Text Rewriter Card -->
+                        <div class="tool-card">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-redo"></i>
+                                </div>
+                                <div class="card-title">
+                                    <h3>Text Rewriter</h3>
+                                    <p>Skriv om text för bättre förståelse</p>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="input-section">
+                                    <label for="rewriterInput" class="input-label">Text att skriva om</label>
+                                    <textarea id="rewriterInput" placeholder="Klistra in text som ska skrivas om..."></textarea>
+                                </div>
+                                <button id="rewriteBtn" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    Skriv om text
+                                </button>
+                                <div class="output-section">
+                                    <label for="rewriterOutput" class="output-label">Resultat</label>
+                                    <textarea id="rewriterOutput" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- File Processing Section -->
+                <section class="section-group">
+                    <div class="section-divider">
+                        <h2 class="section-title">
+                            <i class="fas fa-file-alt"></i>
+                            Filbearbetning
+                        </h2>
+                        <div class="divider-line"></div>
+                    </div>
+                    
+                    <!-- PDF Converter Card -->
+                    <div class="tool-card full-width">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="card-title">
+                                <h3>PDF till Text</h3>
+                                <p>Konvertera PDF-filer till läsbar text</p>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="file-upload-section">
+                                <div class="file-upload">
+                                    <input type="file" id="pdfFile" accept=".pdf" />
+                                    <label for="pdfFile" class="file-upload-label">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Välj PDF-fil</span>
+                                    </label>
+                                </div>
+                                <button id="convertPdfBtn" class="btn btn-primary" disabled>
+                                    <i class="fas fa-convert"></i>
+                                    Konvertera PDF
+                                </button>
+                            </div>
+                            <div class="output-section">
+                                <label for="pdfOutput" class="output-label">Extraherad text</label>
+                                <textarea id="pdfOutput" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Q&A Section -->
+                <section class="section-group">
+                    <div class="section-divider">
+                        <h2 class="section-title">
+                            <i class="fas fa-question-circle"></i>
+                            Frågesvar
+                        </h2>
+                        <div class="divider-line"></div>
+                    </div>
+                    
+                    <div class="tool-card full-width">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="card-title">
+                                <h3>Intelligent Frågesvar</h3>
+                                <p>Få svar på dina frågor baserat på text</p>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="qa-input-grid">
+                                <div class="input-section">
+                                    <label for="questionsInput" class="input-label">Frågor (en per rad)</label>
+                                    <textarea id="questionsInput" placeholder="Skriv dina frågor här, en per rad..."></textarea>
+                                </div>
+                                <div class="input-section">
+                                    <label for="referenceText" class="input-label">Referenstext (valfritt)</label>
+                                    <textarea id="referenceText" placeholder="Klistra in referenstext här..."></textarea>
+                                </div>
+                            </div>
+                            <button id="answerQuestionsBtn" class="btn btn-primary btn-large">
+                                <i class="fas fa-search"></i>
+                                Svara på frågor
+                            </button>
+                            <div class="output-section">
+                                <label class="output-label">Svaren</label>
+                                <div id="answersOutput" class="answers-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Opa GPT - Verktyg för bättre studier</p>
+                <div class="footer-actions">
+                    <button id="clearAllBtn" class="btn btn-secondary">
+                        <i class="fas fa-trash"></i>
+                        Rensa allt
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
